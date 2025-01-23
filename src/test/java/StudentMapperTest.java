@@ -1,6 +1,6 @@
-import org.example.Student;
-import org.example.StudentEntity;
-import org.example.StudentMapper;
+import org.example.basicMapping.Student;
+import org.example.basicMapping.StudentEntity;
+import org.example.basicMapping.StudentMapper;
 import org.junit.jupiter.api.Test;
 import org.mapstruct.factory.Mappers;
 

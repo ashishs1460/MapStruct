@@ -1,9 +1,9 @@
-package org.example;
+package org.example.basicMapping;
 
-public class Student {
+public class StudentEntity {
     private int id;
     private String name;
-    private String className;
+    private String classVal;
 
     public int getId() {
         return id;
@@ -21,11 +21,11 @@ public class Student {
         this.name = name;
     }
 
-    public String getClassName() {
-        return className;
+    public String getClassVal() {
+        return classVal;
     }
 
-    public void setClassName(String className) {
-        this.className = className;
+    public void setClassVal(String classVal) {
+        this.classVal = classVal;
     }
 }
