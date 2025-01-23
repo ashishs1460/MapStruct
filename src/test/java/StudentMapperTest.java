@@ -22,6 +22,7 @@ public class StudentMapperTest {
         assertEquals(entity.getClassVal(), model.getClassName(), "Class values should match");
 
     }
+    @Test
     public void  testModelToEntity(){
         Student model = new Student();
         model.setId(1);
