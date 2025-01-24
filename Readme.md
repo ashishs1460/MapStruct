@@ -72,3 +72,40 @@ List<String> getListOfStrings(List<Integer> listOfIntegers);
 List<Car> getCars(List<CarEntity> carEntities);
 Car getModelFromEntity(CarEntity carEntity);
 }
+
+-----------------------------------------------
+Using Mapstruct we can create mapping of map objects using @MapMapping annotation. 
+
+Syntax
+@Mapper
+public interface UtilityMapper {
+@MapMapping(valueDateFormat = "dd.MM.yyyy")
+Map<String, String> getMap(Map<Long, GregorianCalendar> source);
+}
+-------------------------------------------------
+Using Mapstruct we can create mapping of streams in the same way as we did for collections.
+
+Syntax
+@Mapper
+public interface UtilityMapper {
+Stream<String> getStream(Stream<Integer> source);
+}
+-----------------------------------------------------------------------
+
+Mapstruct automatically maps enums. Enums with same name are mapped automatically. In case of different name, we can use @ValueMapping annotation to do the mapping.
+
+Syntax
+@Mapper
+public interface UtilityMapper {
+@ValueMapping(source = "EXTRA", target = "SPECIAL")
+PlacedOrderType getEnum(OrderType order);
+}
+
+------------------------------------------------------------------
+Mapstruct mapper allows throwing specific exception. Consider a case of custom mapping method where we want to throw our custom exception in case of invalid data.
+
+Syntax
+@Mapper(uses=DateMapper.class)
+public interface UtilityMapper {
+CarEntity getCarEntity(Car car) throws ParseException;
+}
