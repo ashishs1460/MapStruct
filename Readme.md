@@ -54,3 +54,21 @@ defaultValue = "default-value")
 Here
 
 default-value − target-property will be set as default-value in case source-property is null.
+
+--------------------------------------------------------
+Using Mapstruct we can pass a computed value using defaultExpression in case source property is null using defaultExpression attribute of @Mapping annotation.
+
+Syntax
+@Mapping(target = "target-property", source="source-property" defaultExpression = "default-value-method")
+default-value-method − target-property will be set as result of default-value-method in case source-property is null.
+
+---------------------------------------------------------------
+Using Mapstruct we can map list in similar fashion as we map primitives. To get a list of objects, we should provide a mapper method which can map an object.
+
+Syntax
+@Mapper
+public interface CarMapper {
+List<String> getListOfStrings(List<Integer> listOfIntegers);
+List<Car> getCars(List<CarEntity> carEntities);
+Car getModelFromEntity(CarEntity carEntity);
+}
