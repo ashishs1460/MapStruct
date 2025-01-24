@@ -1,111 +1,157 @@
-MapStruct automates the process of creating a mapper to map data objects with model objects using annotations.
-MapStruct is a Java based library, so the very first requirement is to have JDK installed on your machine.
-We can add custom methods as well to the Mapper created using org.mapstruct.Mapper annotation.
+MapStruct Overview
 
-*MapStruct handles conversion of type conversions automatically in most of the cases. For example, int to Long or String conversion
+Introduction
 
-------------------------------
-MapStruct handles conversion of numbers to String in required format seamlessly. We can pass the required format as numberFormat during @Mapping annotation. For example, consider a case where an amount stored in numbers is to be shown in currency format.
+MapStruct is a Java-based library that simplifies the process of mapping data objects to model objects using annotations. It automates type conversions and allows developers to add custom mapping logic when needed.
 
-Source − Entity has price as 350.
+Key Features
 
-Target − Model to show price as $350.00.
+Automates type conversions (e.g., int to Long, or String conversions).
 
-numberFormat − Use format $#.00
+Supports custom mapping methods using annotations.
 
----------------------------------------
-MapStruct handles conversion of date to String in required format seamlessly. We can pass the required format as dateFormat during @Mapping annotation. For example, consider a case where a date stored in numbers is to be shown in particular format.
+Handles complex type conversions like numbers to strings or dates to specific formats.
 
-Source − Entity has date as GregorianCalendar(2015, 3, 5).
+Installation Requirements
 
-Target − Model to show date as 05.04.2015.
+MapStruct requires the Java Development Kit (JDK) to be installed on your machine.
 
-dateFormat − Use format dd.MM.yyyy
--------------------------------------
+Features and Syntax
 
-MapStruct allows to call a conversion method for customized logic. We can use expression to achieve the same where we can pass any java object and call its method to do the conversion.
-Syntax
-@Mapping(target = "target-property",
-expression = "java(target-method())")
+Automatic Type Conversion
 
-target-property − the property for which we are doing the mapping.
+MapStruct handles common type conversions automatically. For instance:
 
-expression − mapper will call the java method written in the expression.
+Source: int
 
-target-method − target-method is the method to be called. In case method is present in different class, use new class-name.target-method()
+Target: Long or String
 
---------------------------------------
-MapStruct allows to map a constant value to a property.
+Number Formatting
 
-Syntax
-@Mapping(target = "target-property", const = "const-value")
+MapStruct can convert numbers to strings in the desired format seamlessly. Use the numberFormat attribute in the @Mapping annotation.
 
-target-property − the property for which we are doing the mapping.
+Example
 
-const-value − mapper will map the const-value to target-property.
+Source: Entity has price as 350.
 
---------------------------------------
+Target: Model displays price as $350.00.
 
-Using Mapstruct we can pass the default value in case source property is null using defaultValue attribute of @Mapping annotation.
+Format: $#.00
 
-Syntax
-@Mapping(target = "target-property", source="source-property"
-defaultValue = "default-value")
-Here
+@Mapping(target = "price", source = "price", numberFormat = "$#.00")
 
-default-value − target-property will be set as default-value in case source-property is null.
+Date Formatting
 
---------------------------------------------------------
-Using Mapstruct we can pass a computed value using defaultExpression in case source property is null using defaultExpression attribute of @Mapping annotation.
+MapStruct can convert dates to strings in a specific format using the dateFormat attribute in the @Mapping annotation.
 
-Syntax
-@Mapping(target = "target-property", source="source-property" defaultExpression = "default-value-method")
-default-value-method − target-property will be set as result of default-value-method in case source-property is null.
+Example
 
----------------------------------------------------------------
-Using Mapstruct we can map list in similar fashion as we map primitives. To get a list of objects, we should provide a mapper method which can map an object.
+Source: Entity has date as GregorianCalendar(2015, 3, 5).
+
+Target: Model displays date as 05.04.2015.
+
+Format: dd.MM.yyyy
+
+@Mapping(target = "manufacturingDate", source = "manufacturingDate", dateFormat = "dd.MM.yyyy")
+
+Custom Conversion Methods
+
+MapStruct supports calling custom methods for conversion using the expression attribute.
 
 Syntax
+
+@Mapping(target = "targetProperty", expression = "java(targetMethod())")
+
+Example
+
+To call a method from another class:
+
+@Mapping(target = "propertyName", expression = "java(UtilityClass.methodName())")
+
+Constant Value Mapping
+
+MapStruct allows mapping a constant value to a property.
+
+Syntax
+
+@Mapping(target = "targetProperty", constant = "constantValue")
+
+Default Value Handling
+
+MapStruct can set default values if the source property is null using the defaultValue attribute.
+
+Syntax
+
+@Mapping(target = "targetProperty", source = "sourceProperty", defaultValue = "defaultValue")
+
+Computed Default Values
+
+MapStruct can compute default values if the source property is null using the defaultExpression attribute.
+
+Syntax
+
+@Mapping(target = "targetProperty", source = "sourceProperty", defaultExpression = "java(computeDefaultValue())")
+
+Mapping Lists
+
+MapStruct supports mapping lists by providing a mapper method to handle the individual object mappings.
+
+Example
+
 @Mapper
 public interface CarMapper {
-List<String> getListOfStrings(List<Integer> listOfIntegers);
-List<Car> getCars(List<CarEntity> carEntities);
-Car getModelFromEntity(CarEntity carEntity);
+    List<String> getListOfStrings(List<Integer> listOfIntegers);
+    List<Car> getCars(List<CarEntity> carEntities);
+    Car getModelFromEntity(CarEntity carEntity);
 }
 
------------------------------------------------
-Using Mapstruct we can create mapping of map objects using @MapMapping annotation. 
+Mapping Maps
+
+MapStruct can map Map objects using the @MapMapping annotation.
 
 Syntax
+
 @Mapper
 public interface UtilityMapper {
-@MapMapping(valueDateFormat = "dd.MM.yyyy")
-Map<String, String> getMap(Map<Long, GregorianCalendar> source);
+    @MapMapping(valueDateFormat = "dd.MM.yyyy")
+    Map<String, String> getMap(Map<Long, GregorianCalendar> source);
 }
--------------------------------------------------
-Using Mapstruct we can create mapping of streams in the same way as we did for collections.
+
+Mapping Streams
+
+MapStruct supports mapping Java Streams similarly to collections.
 
 Syntax
+
 @Mapper
 public interface UtilityMapper {
-Stream<String> getStream(Stream<Integer> source);
+    Stream<String> getStream(Stream<Integer> source);
 }
------------------------------------------------------------------------
 
-Mapstruct automatically maps enums. Enums with same name are mapped automatically. In case of different name, we can use @ValueMapping annotation to do the mapping.
+Enum Mapping
 
-Syntax
+MapStruct automatically maps enums with identical names. For enums with different names, use the @ValueMapping annotation.
+
+Example
+
 @Mapper
 public interface UtilityMapper {
-@ValueMapping(source = "EXTRA", target = "SPECIAL")
-PlacedOrderType getEnum(OrderType order);
+    @ValueMapping(source = "EXTRA", target = "SPECIAL")
+    PlacedOrderType getEnum(OrderType order);
 }
 
-------------------------------------------------------------------
-Mapstruct mapper allows throwing specific exception. Consider a case of custom mapping method where we want to throw our custom exception in case of invalid data.
+Exception Handling in Custom Mapping
 
-Syntax
-@Mapper(uses=DateMapper.class)
+MapStruct allows throwing specific exceptions during custom mappings.
+
+Example
+
+@Mapper(uses = DateMapper.class)
 public interface UtilityMapper {
-CarEntity getCarEntity(Car car) throws ParseException;
+    CarEntity getCarEntity(Car car) throws ParseException;
 }
+
+Conclusion
+
+MapStruct is a powerful library for simplifying object mapping in Java projects. By leveraging annotations, developers can focus on business logic while MapStruct takes care of the data transformation seamlessly. With support for custom methods, type conversions, and exception handling, MapStruct proves to be a versatile tool in any Java developer's toolkit.
+
