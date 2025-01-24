@@ -1,8 +1,20 @@
 package org.example.dataTypeConversion.numberFormat;
 
+import java.util.GregorianCalendar;
+
 public class Car {
     private int id;
     private String price;
+
+    private String manufacturingDate;
+
+    public String getManufacturingDate() {
+        return manufacturingDate;
+    }
+
+    public void setManufacturingDate(String manufacturingDate) {
+        this.manufacturingDate = manufacturingDate;
+    }
 
     public int getId() {
         return id;

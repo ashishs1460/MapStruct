@@ -4,6 +4,8 @@ import org.example.dataTypeConversion.numberFormat.CarMapper;
 import org.junit.jupiter.api.Test;
 import org.mapstruct.factory.Mappers;
 
+import java.util.GregorianCalendar;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class CarMapperTest {
@@ -14,8 +16,10 @@ public class CarMapperTest {
         CarEntity carEntity = new CarEntity();
         carEntity.setId(1);
         carEntity.setPrice(45000);
+        carEntity.setManufacturingDate(new GregorianCalendar(2015, 3, 5));
         Car car = carMapper.getModelFromEntity(carEntity);
         assertEquals(carEntity.getId(),car.getId());
         assertEquals(car.getPrice(),"$45000.00");
+        assertEquals(car.getManufacturingDate(),"05.04.2015");
     }
 }
