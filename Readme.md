@@ -43,3 +43,14 @@ Syntax
 target-property − the property for which we are doing the mapping.
 
 const-value − mapper will map the const-value to target-property.
+
+--------------------------------------
+
+Using Mapstruct we can pass the default value in case source property is null using defaultValue attribute of @Mapping annotation.
+
+Syntax
+@Mapping(target = "target-property", source="source-property"
+defaultValue = "default-value")
+Here
+
+default-value − target-property will be set as default-value in case source-property is null.

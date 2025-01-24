@@ -24,5 +24,6 @@ public class CarMapperTest {
         assertEquals(car.getPrice(),"$45000.00");
         assertEquals(car.getManufacturingDate(),"05.04.2015");
         assertEquals("Suzuki", car.getBrand());
+        assertEquals("Sample",car.getName());
     }
 }

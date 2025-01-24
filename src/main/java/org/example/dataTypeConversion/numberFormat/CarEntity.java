@@ -7,6 +7,16 @@ public class CarEntity {
     private double price;
     private GregorianCalendar manufacturingDate;
 
+    private String name;
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
     public GregorianCalendar getManufacturingDate() {
         return manufacturingDate;
     }
