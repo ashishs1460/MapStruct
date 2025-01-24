@@ -21,3 +21,15 @@ Source − Entity has date as GregorianCalendar(2015, 3, 5).
 Target − Model to show date as 05.04.2015.
 
 dateFormat − Use format dd.MM.yyyy
+-------------------------------------
+
+MapStruct allows to call a conversion method for customized logic. We can use expression to achieve the same where we can pass any java object and call its method to do the conversion.
+Syntax
+@Mapping(target = "target-property",
+expression = "java(target-method())")
+
+target-property − the property for which we are doing the mapping.
+
+expression − mapper will call the java method written in the expression.
+
+target-method − target-method is the method to be called. In case method is present in different class, use new class-name.target-method()

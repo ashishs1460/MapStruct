@@ -1,6 +1,7 @@
 import org.example.dataTypeConversion.numberFormat.Car;
 import org.example.dataTypeConversion.numberFormat.CarEntity;
 import org.example.dataTypeConversion.numberFormat.CarMapper;
+import org.example.dataTypeConversion.numberFormat.CarMapperExpression;
 import org.junit.jupiter.api.Test;
 import org.mapstruct.factory.Mappers;
 
@@ -10,7 +11,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class CarMapperTest {
 
-    private CarMapper carMapper = Mappers.getMapper(CarMapper.class);
+//    private CarMapper carMapper = Mappers.getMapper(CarMapper.class);
+    private CarMapperExpression carMapper = Mappers.getMapper(CarMapperExpression.class);
     @Test
     public void testEntityToModel(){
         CarEntity carEntity = new CarEntity();
