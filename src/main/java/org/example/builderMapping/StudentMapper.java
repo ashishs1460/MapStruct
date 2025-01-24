@@ -1,6 +1,6 @@
 package org.example.builderMapping;
 
-import org.example.directFieldMapping.StudentEntity;
+
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
