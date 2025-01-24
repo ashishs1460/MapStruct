@@ -11,8 +11,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class CarMapperTest {
 
-//    private CarMapper carMapper = Mappers.getMapper(CarMapper.class);
-    private CarMapperExpression carMapper = Mappers.getMapper(CarMapperExpression.class);
+  private CarMapper carMapper = Mappers.getMapper(CarMapper.class);
+  //  private CarMapperExpression carMapper = Mappers.getMapper(CarMapperExpression.class);
     @Test
     public void testEntityToModel(){
         CarEntity carEntity = new CarEntity();
@@ -23,5 +23,6 @@ public class CarMapperTest {
         assertEquals(carEntity.getId(),car.getId());
         assertEquals(car.getPrice(),"$45000.00");
         assertEquals(car.getManufacturingDate(),"05.04.2015");
+        assertEquals("Suzuki", car.getBrand());
     }
 }

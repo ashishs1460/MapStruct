@@ -33,3 +33,13 @@ target-property − the property for which we are doing the mapping.
 expression − mapper will call the java method written in the expression.
 
 target-method − target-method is the method to be called. In case method is present in different class, use new class-name.target-method()
+
+--------------------------------------
+MapStruct allows to map a constant value to a property.
+
+Syntax
+@Mapping(target = "target-property", const = "const-value")
+
+target-property − the property for which we are doing the mapping.
+
+const-value − mapper will map the const-value to target-property.
